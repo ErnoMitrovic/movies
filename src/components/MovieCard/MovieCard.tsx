@@ -23,10 +23,10 @@ const MovieCard: React.FC<MovieCardProps> = ({
     return (
         <div onClick={
             () => navigate(`/movie/${movieId}`)
-        } className='relative overflow-hidden h-auto shadow shrink-0 bg-white float-left mr-5 mb-5 group rounded-lg scroll-smooth'>
-            <div className="bg-black transition-opacity duration-300 overflow-hidden">
+        } className='relative overflow-hidden h-auto shadow shrink-0 bg-white float-left mx-2 group rounded-lg scroll-smooth'>
+            <div className=" flex justify-center bg-black transition-opacity duration-300 overflow-hidden">
                 <img src={imageSourceComplete} alt={title}
-                    className="relative h-80 max-w-none transition duration-900 hover:opacity-75 hover:scale-105" />
+                    className="h-80 transition duration-900 hover:opacity-75 hover:scale-105" />
             </div>
             <div className='absolute bottom-0 left-0 w-full  text-white transition-opacity duration-300 opacity-0 group-hover:opacity-100' >
                 <div className="bg-gradient-to-t from-black p-4">

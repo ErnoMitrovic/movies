@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getPopular } from '../../services/movies';
 import { IMovieResponse } from './types';
-import { MovieCard } from '../../components/MovieCard';
+import { MovieGrid } from '../../components/MovieGrid';
 
 const Popular = () => {
   const [movies, setMovies] = useState<IMovieResponse[]>([]);
@@ -27,18 +27,7 @@ const Popular = () => {
     <div>
       {isLoading ? <p>Loading...</p> :
         error ? <p>{error}</p> :
-          movies.map((movie) => {
-            console.log(movie)
-            return (
-              <MovieCard key={movie.id}
-                title={movie.title}
-                genreId={movie.genre_ids[0]}
-                posterPath={movie.poster_path}
-                movieId={movie.id}
-                voteAverage={movie.vote_average}
-              />
-            )
-          })
+          <MovieGrid movies={movies} title='Popular' />
       }
     </div>
   )

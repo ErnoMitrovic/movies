@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { MovieDisplayer } from "../../components/MovieDisplayer";
-import { getNowPlaying, getPopular, getTopRated } from "../../services/movies";
+import { getNowPlaying, getPopular, getTopRated, getUpcoming } from "../../services/movies";
 import { IMovieResponse } from "../Popular/types";
 
 const Home = () => {
     const [popularMovies, setPopularMovies] = useState<IMovieResponse[]>([]);
     const [topRatedMovies, setTopRatedMovies] = useState<IMovieResponse[]>([]);
     const [nowPlaying, setNowPlaying] = useState<IMovieResponse[]>([]);
+    const [upcoming, setUpcoming] = useState<IMovieResponse[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -37,11 +38,21 @@ const Home = () => {
         }
     }
 
+    const getUpcomingMovies = async () => {
+        try {
+            const response = await getUpcoming();
+            setUpcoming(response.results);
+        } catch (error) {
+            setError('Error fetching upcoming movies');
+        }
+    }
+
     useEffect(() => {
         setIsLoading(true);
         getPopularMovies();
         getTopRatedMovies();
         getNowPlayingMovies();
+        getUpcomingMovies();
         setIsLoading(false);
     }, []);
 
@@ -54,6 +65,7 @@ const Home = () => {
                         <MovieDisplayer title="POPULAR" movies={popularMovies} />
                         <MovieDisplayer title="TOP RATED" movies={topRatedMovies} />
                         <MovieDisplayer title="NOW PLAYING" movies={nowPlaying} />
+                        <MovieDisplayer title="UPCOMING" movies={upcoming} />
                     </>
             }
         </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getTopRated } from '../../services/movies';
 import { MovieCard } from '../../components/MovieCard';
 import { IMovieResponse } from '../Popular/types';
+import { MovieGrid } from '../../components/MovieGrid';
 
 const TopRated = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -30,15 +31,7 @@ const TopRated = () => {
       {
         error ? <p>{error}</p> :
           <div>
-            {movies.map((movie) => (
-              <MovieCard key={movie.id}
-                title={movie.title}
-                genreId={movie.genre_ids[0]}
-                posterPath={movie.poster_path}
-                movieId={movie.id}
-                voteAverage={movie.vote_average}
-              />
-            ))}
+            <MovieGrid movies={movies} title='Top rated movies' />
           </div>
       }
     </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { IMovieResponse } from "../Popular/types";
 import { getUpcoming } from "../../services/movies";
 import { MovieCard } from "../../components/MovieCard";
+import { MovieGrid } from "../../components/MovieGrid";
 
 const Upcoming = () => {
   const [upcoming, setUpcoming] = useState<IMovieResponse[]>([]);
@@ -29,16 +30,7 @@ const Upcoming = () => {
       {isLoading && <p>Loading...</p>}
       {
         error ? <p>{error}</p> :
-          <div>
-            {upcoming.map((movie) => (
-              <MovieCard key={movie.id}
-                title={movie.title}
-                genreId={movie.genre_ids[0]}
-                posterPath={movie.poster_path}
-                movieId={movie.id}
-                voteAverage={movie.vote_average} />
-            ))}
-          </div>
+          <MovieGrid title="Upcoming" movies={upcoming} />
       }
     </div>
   )
