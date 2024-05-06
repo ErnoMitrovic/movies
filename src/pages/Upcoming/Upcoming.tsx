@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { IMovieResponse } from "../Popular/types";
 import { getUpcoming } from "../../services/movies";
-import { MovieCard } from "../../components/MovieCard";
 import { MovieGrid } from "../../components/MovieGrid";
 
 const Upcoming = () => {

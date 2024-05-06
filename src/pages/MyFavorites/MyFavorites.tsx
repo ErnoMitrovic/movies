@@ -28,6 +28,7 @@ const MyFavorites = () => {
 
   useEffect(() => {
     getFavorites();
+    // eslint-disable-next-line
   }, []);
 
   return (

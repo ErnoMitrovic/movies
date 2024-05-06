@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { getTopRated } from '../../services/movies';
-import { MovieCard } from '../../components/MovieCard';
 import { IMovieResponse } from '../Popular/types';
 import { MovieGrid } from '../../components/MovieGrid';
 

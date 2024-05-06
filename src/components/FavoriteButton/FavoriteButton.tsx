@@ -16,7 +16,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ isFavorite, onClick }) 
                         </g>
                     </g>
                 </svg>
-                <a href="#" className="mx-2 text-sm hover:underline">Add to Favorites</a>
+                <button type="button" className="mx-2 text-sm hover:underline">Add to Favorites</button>
             </div>
         </div>
     )
