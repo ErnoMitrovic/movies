@@ -29,5 +29,15 @@ export const ROUTES: Record<string, RouteElement> = {
         name: 'Movie',
         path: '/movie/:id',
         notIncludeInMenu: true
+    }, 
+    LOGIN: {
+        name: 'Login',
+        path: '/login',
+        notIncludeInMenu: true
+    },
+    SIGN_UP: {
+        name: 'Sign Up',
+        path: '/sign-up',
+        notIncludeInMenu: true
     }
 }

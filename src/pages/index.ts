@@ -1,5 +1,9 @@
 export { Home } from "./Home";
-export { Popular } from "./Popular";
-export { TopRated } from "./TopRated";
+export { Login } from "./Login";
+export { Movie } from "./Movie";
+export { MyFavorites } from "./MyFavorites";
 export { NowPlaying } from "./NowPlaying";
+export { Popular } from "./Popular";
+export { SignUp } from "./SignUp";
+export { TopRated } from "./TopRated";
 export { Upcoming } from "./Upcoming";

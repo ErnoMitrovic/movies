@@ -3,11 +3,13 @@ import { ROUTES } from '../../routes/constants';
 import { ReactComponent as HamburgerIcon } from '../../assets/svg/Hamburguer.svg';
 import { ReactComponent as CloseIcon } from '../../assets/svg/Close.svg';
 import React from 'react';
+import { useAppContext } from '../../store/app_context';
 
 const Header = () => {
     const location = useLocation();
     const path = location.pathname;
     const navigate = useNavigate();
+    const { logOut } = useAppContext();
     const [isOpen, setIsOpen] = React.useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -35,6 +37,12 @@ const Header = () => {
                         )
                     })
                 }
+                <li>
+                    <button type='button' className='p-2 bg-red-500 text-white hover:bg-red-700 rounded-md' onClick={() => {
+                        logOut();
+                        navigate(ROUTES.LOGIN.path)
+                    }}>Logout</button>
+                </li>
             </ul>
         </nav>
     )

@@ -1,26 +1,38 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import PrivateRouter from './PrivateRouter';
+import PublicRouter from './PublicRouter';
+import { ROUTES } from './constants';
+import { Home, Upcoming, NowPlaying, Popular, TopRated, Movie, MyFavorites, Login, SignUp } from '../pages';
+import { useAppContext } from '../store/app_context';
 
-import PrivateRouter from "./PrivateRouter";
-import { ROUTES } from "./constants";
-import { Home, Upcoming, NowPlaying, Popular, TopRated } from "../pages";
-import { Movie } from "../pages/Movie";
-import { MyFavorites } from "../pages/MyFavorites";
+const AppRouter = () => {
+    const { user } = useAppContext();
+    const isUserLoggedIn = Boolean(user);
 
-const routes: RouteObject[] = [
-    {
-        path: ROUTES.HOME.path,
-        element: <PrivateRouter />,
-        children: [
-            { path: ROUTES.HOME.path, element: <Home /> },
-            { path: ROUTES.POPULAR.path , element: <Popular /> },
-            { path: ROUTES.TOP_RATED.path, element: <TopRated /> },
-            { path: ROUTES.NOW_PLAYING.path, element: <NowPlaying /> },
-            { path: ROUTES.UPCOMING.path, element: <Upcoming /> },
-            { path: ROUTES.MOVIE.path, element: <Movie />},
-            { path: ROUTES.MY_FAVORITES.path, element: <MyFavorites />}, 
-            { path: '*', element: <div>404</div>}
-        ]
-    },
-];
+    return (
+        <Router>
+            <Routes>
+                {/* Private Routes */}
+                <Route path={ROUTES.HOME.path} element={isUserLoggedIn ? <PrivateRouter /> : <Navigate to={ROUTES.LOGIN.path} />}>
+                    <Route index element={<Home />} />
+                    <Route path={ROUTES.POPULAR.path} element={<Popular />} />
+                    <Route path={ROUTES.TOP_RATED.path} element={<TopRated />} />
+                    <Route path={ROUTES.NOW_PLAYING.path} element={<NowPlaying />} />
+                    <Route path={ROUTES.UPCOMING.path} element={<Upcoming />} />
+                    <Route path={ROUTES.MOVIE.path} element={<Movie />} />
+                    <Route path={ROUTES.MY_FAVORITES.path} element={<MyFavorites />} />
+                    <Route path="*" element={<div>404</div>} />
+                </Route>
 
-export default createBrowserRouter(routes);
+                {/* Public Routes */}
+                <Route path={ROUTES.HOME.path} element={isUserLoggedIn ? <Navigate to={ROUTES.HOME.path} /> : <PublicRouter />}>
+                    <Route path={ROUTES.LOGIN.path} element={<Login />} />
+                    <Route path={ROUTES.SIGN_UP.path} element={<SignUp />} />
+                </Route>
+            </Routes>
+        </Router>
+    );
+}
+
+export default AppRouter;
